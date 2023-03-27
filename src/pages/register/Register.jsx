@@ -15,7 +15,7 @@ const Register = () => {
         setError(false);
         try {
 
-            const res = await axios.post('/register', {
+            const res = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/register', {
                 username,
                 email,
                 password,
