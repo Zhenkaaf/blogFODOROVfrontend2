@@ -1,0 +1,33 @@
+
+.header {
+    width: 100%;
+    min-height: 50px;
+    background-color: rgba(0,0,0,0.7);
+   
+   
+}
+.menu {
+    max-width: 800px;
+    background-color: rebeccapurple;
+    min-height: 50px;
+   /*  position: fixed; */
+   /*  top: 0; */
+    margin: 0 auto;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.menu__header {
+    padding: 0px 20px;
+}
+.menu__list {
+    margin: 0;
+    display: flex;
+}
+.menu__item {
+    display: block;
+    padding: 0px 20px;
+   
+}
