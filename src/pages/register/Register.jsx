@@ -15,12 +15,12 @@ const Register = () => {
         setError(false);
         try {
 
-            const res = await axios.post('/auth/register', {
+            const res = await axios.post('/register', {
                 username,
                 email,
                 password,
             });
-            console.log('front res===', res);
+            console.log('front success res===', res);
             res.data && window.location.replace('/login');
         } catch (err) {
             console.error('front error===', err.response.data);
