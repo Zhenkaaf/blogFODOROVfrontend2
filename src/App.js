@@ -9,6 +9,7 @@ import Menu from './components/menu/Menu';
 import Post from './pages/Post';
 import './styles.css';
 import Register from './pages/register/Register';
+import Login from './pages/login/Login';
 
 
 const Layout = () => {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/error",
