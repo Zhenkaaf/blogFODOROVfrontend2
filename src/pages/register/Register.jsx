@@ -21,7 +21,7 @@ const Register = () => {
                 password,
             });
             console.log('front success res===', res);
-            res.data && window.location.replace('/login');
+            res.data && window.location.replace('/profile');
         } catch (err) {
             console.error('front error===', err.response.data);
             setError(true);
