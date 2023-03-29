@@ -7,14 +7,14 @@ import { router } from './App'
 import { RouterProvider } from "react-router-dom";
 import { HashRouter, BrowserRouter } from "react-router-dom";
 
-const isLocal = window.location.hostname.includes('localhost');
-const Router = isLocal ? BrowserRouter : HashRouter;
+/* const isLocal = window.location.hostname.includes('localhost');
+const Router = isLocal ? BrowserRouter : HashRouter; */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Router>
+  <BrowserRouter>
     <App />
-  </Router>
+  </BrowserRouter>
 
   //<React.StrictMode>
 
