@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Context } from "../context/Context";
 
 const NewPost = () => {
     const navigate = useNavigate();
@@ -7,12 +8,15 @@ const NewPost = () => {
     const authorRef = useRef(null);
     const textRef = useRef(null);
     const [data, setData] = useState(null);
+    const {user} = useContext(Context);
+
     useEffect(() => {
         console.log('work');
 
     }, []);
     const sendData = (event) => {
         event.preventDefault();
+        console.log('createNewPost===', user.userEmail)
         /*  fetch('http://localhost:8001/newpost', { */
         fetch('https://zany-jade-chipmunk-cape.cyclic.app/newpost', {
             method: 'POST',
@@ -26,6 +30,7 @@ const NewPost = () => {
                 title: titleRef.current.value,
                 author: authorRef.current.value,
                 text: textRef.current.value,
+                email: user.userEmail,
             })
         })
             .then(response => {

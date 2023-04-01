@@ -15,6 +15,20 @@ const Profile = () => {
 
         const [username, setUsername] = useState('');
         const [email, setEmail] = useState('');
+
+        useEffect(() => {
+            const fetchPersonalPosts = async () => {
+                try {
+                    let myPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts?email=${user.userEmail}`);
+                    console.log('myPosts===', myPosts);
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+            fetchPersonalPosts();
+            
+        }, [user]);
+        
 /*     const { user, dispatch } = useContext(Context);
     const [file, setFile] = useState(null);
    
