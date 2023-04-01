@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Context } from '../../context/Context';
 /* import Sidebar from '../../components/sidebar/Sidebar';
 import { Context } from '../../context/Context'; */
 import './profile.css';
@@ -8,11 +9,16 @@ import './profile.css';
 
 
 const Profile = () => {
+    const {dispatch, isFetching, user} = useContext(Context);
 
+        console.log('profile user====', user);
+
+        const [username, setUsername] = useState('');
+        const [email, setEmail] = useState('');
 /*     const { user, dispatch } = useContext(Context);
     const [file, setFile] = useState(null);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+   
+    
     const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
 
@@ -53,8 +59,7 @@ const Profile = () => {
         <div className="settings">
             <div className="settingsWrapper">
                 <div className="settingsTitle">
-                    <span className="settingsUpdateTitle">Update Your Account</span>
-                    <span className="settingsDeleteTitle">Delete Account</span>
+                    <span className="settingsUpdateTitle">Hello {user.userName} Update Your Account</span>
                 </div>
                 <form action="" className="settingsForm" /* onSubmit={handleSubmit} */>
                     <label htmlFor="">Profile Picture</label>
@@ -66,11 +71,14 @@ const Profile = () => {
                         <input type="file" id='fileInput' style={{ display: 'none' }} /* onChange={(e) => setFile(e.target.files[0])} */ />
                     </div>
                     <label htmlFor="">Username</label>
-                    <input type="text" /* placeholder={user.username} onChange={e => setUsername(e.target.value)} *//>
+                    <input type="text" placeholder={user.username} onChange={e => setUsername(e.target.value)} />
+
                     <label htmlFor="">Email</label>
-                    <input type="text" /* placeholder={user.email} onChange={e => setEmail(e.target.value)} *//>
+                    <input type="text" placeholder={user.email} onChange={e => setEmail(e.target.value)} />
+
                     <label htmlFor="">Password</label>
                     <input type="password" /* onChange={e => setPassword(e.target.value)} *//>
+
                     <button className="settingsSubmit" type='submit'>Update</button>
                   {/*   {success && <span style={{color: 'green', textAlign: 'center', marginTop: '10px'}}>User has been updated!</span>} */}
                 </form>

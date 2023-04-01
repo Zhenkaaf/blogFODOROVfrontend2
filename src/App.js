@@ -2,8 +2,9 @@ import './App.css';
 import './styles.css';
 import { lazy, Suspense, useContext } from 'react';
 import { Outlet, Routes, Route } from 'react-router-dom';
+import { Context } from './context/Context';
 
-const Home = lazy(() => import('./pages/home/Home'));
+/* const Home = lazy(() => import('./pages/home/Home'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const NewPost = lazy(() => import('./pages/NewPost'));
 const Posts = lazy(() => import('./pages/Posts'));
@@ -11,43 +12,47 @@ const Post = lazy(() => import('./pages/Post'));
 const Error = lazy(() => import('./pages/Error'));
 const Menu = lazy(() => import('./components/menu/Menu'));
 const Login = lazy(() => import('./pages/login/Login'));
-const Register = lazy(() => import('./pages/register/Register'));
+const Register = lazy(() => import('./pages/register/Register')); */
 
-const Layout = ({ children }) => {
+
+import Home from './pages/home/Home.jsx';
+import NewPost from './pages/NewPost';
+import Posts from './pages/Posts';
+import Error from './pages/Error';
+import Menu from './components/menu/Menu';
+import Post from './pages/Post';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
+import Profile from './pages/profile/Profile';
+
+const Layout = () => {
   return (
     <>
       <Menu />
-      {children}
+      <Outlet />
     </>
   );
 };
 
 function App() {
-  const user = true;
+ 
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Outlet />
-            </Layout>
-          }
-        >
-          <Route path="/" element={<Home />} />
-          <Route path="register" element={/* user ? <Home /> :  */<Register />} />
-          <Route path="login" element={/* user ? <Home /> :  */<Login />} />
-          <Route path="newpost" element={<NewPost />} />
-          <Route path="editpost" element={<Post />} />
-          <Route path="profile" element={user ? <Profile /> : <Home />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="error" element={<Error />} />
-        {/*   <Route path="post/:postId" element={<Single />} /> */}
-        </Route>
-      </Routes>
-    </Suspense>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index /* path="/" */ element={<Home />} />
+            <Route path="register" element={/* user ? <Home /> :  */<Register />} />
+            <Route path="login" element={/* user ? <Home /> :  */<Login />} />
+            <Route path="newpost" element={<NewPost />} />
+            <Route path="editpost" element={<Post />} />
+            <Route path="profile" element={/* user ?  */<Profile />/*  : <Home /> */} />
+            <Route path="posts" element={<Posts />} />
+            <Route path="error" element={<Error />} />
+            {/*   <Route path="post/:postId" element={<Single />} /> */}
+          </Route>
+        </Routes>
+   </Suspense>
   );
 }
 

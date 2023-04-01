@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import './home.css';
-import Menu from "../../components/menu/Menu";
 
 const Home = () => {
 

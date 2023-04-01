@@ -1,13 +1,15 @@
 import './login.css';
 import { Link } from 'react-router-dom';
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 /* import { Context } from '../../context/Context'; */
 import axios from 'axios';
+import { Context } from '../../context/Context';
 
 const Login = () => {
 
     const userRef = useRef();
     const passwordRef = useRef();
+    
 /*     const { dispatch, isFetching } = useContext(Context); */
 
     const handleSubmit = async (e) => {
@@ -28,7 +30,8 @@ const Login = () => {
     };
 
 
-
+   
+   
     return (
         <div className="login">
             <span className="loginTitle">Login</span>
