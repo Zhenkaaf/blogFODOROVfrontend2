@@ -1,9 +1,27 @@
 .slider {
-
-}
-.slider__img {
+   /*  position: relative;
     width: 100%;
-    height: 450px;
+    height: 100vh; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+.slider::before {
+   /*  content: '';
+    background-image: url("https://trello.com/1/cards/641ff5e05b2f810f24bdc8bb/attachments/641ff5f7d9d0664367535f3c/previews/641ff5f8d9d0664367536607/download/novogodnie-oboi-2018-2-1.jpg");
+   background-size: cover;
+   position: fixed;
+   top: 0px;
+   right: 0px;
+   bottom: 0px;
+   left: 0px;
+   opacity: 0.6;
+   z-index: -1; */
     /* margin-top: 80px; */
-    object-fit: cover;
+    /* object-fit: cover;
+    opacity: 0.6;
+    top: 0; */
+}
+.posts__header {
+    padding-top: 60px;
 }

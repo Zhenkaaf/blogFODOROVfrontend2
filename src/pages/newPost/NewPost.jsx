@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Context } from "../context/Context";
+import { Context } from "../../context/Context";
+import './newpost.css';
 
 const NewPost = () => {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const NewPost = () => {
     };
 
     return (
-        <div>
+        <div className="new">
             <h1>NewPost</h1>
             <form id="contact-form" method="post">
                 <div className="form-info">

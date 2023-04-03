@@ -16,7 +16,7 @@ const Register = lazy(() => import('./pages/register/Register')); */
 
 
 import Home from './pages/home/Home.jsx';
-import NewPost from './pages/NewPost';
+import NewPost from './pages/newPost/NewPost';
 import Posts from './pages/Posts';
 import Error from './pages/Error';
 import Menu from './components/menu/Menu';
@@ -24,6 +24,7 @@ import Post from './pages/Post';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
+import SinglePost from './components/post/Post';
 
 const Layout = () => {
   return (
@@ -47,8 +48,9 @@ function App() {
             <Route path="newpost" element={<NewPost />} />
             <Route path="editpost" element={<Post />} />
             <Route path="profile" element={/* user ?  */<Profile />/*  : <Home /> */} />
-            <Route path="posts" element={<Posts />} />
+           {/*  <Route path="posts" element={<Posts />} /> */}
             <Route path="error" element={<Error />} />
+            <Route path="singlepost" element={<SinglePost />} />
             {/*   <Route path="post/:postId" element={<Single />} /> */}
           </Route>
         </Routes>

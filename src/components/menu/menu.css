@@ -2,21 +2,20 @@
 .header {
     width: 100%;
     min-height: 50px;
-    background-color: rgba(0,0,0,0.7);
-   
-   
+    background-color: rebeccapurple;
+    position: fixed;
+    z-index: 999;
 }
 .menu {
     max-width: 800px;
-    background-color: rebeccapurple;
+    
     min-height: 50px;
-   /*  position: fixed; */
+  /*   position: fixed; */
    /*  top: 0; */
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
 }
 .menu__header {
     padding: 0px 20px;
@@ -33,6 +32,8 @@
     display: flex;
     align-items: center;
     padding-right: 0px;
+    cursor: pointer;
+    color: white;
 }
 .menu__profileImg {
     width: 40px;
