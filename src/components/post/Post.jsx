@@ -6,8 +6,8 @@ import './post.css';
 
 
 
-export default function SinglePost({ post, delPost}) {
-
+const Post = ({ post, delPost }) => {
+    const { user } = useContext(Context);
     /*     const PF = 'http://localhost:5000/images/';
         const location = useLocation();
         const path = location.pathname.split('/')[2];
@@ -53,29 +53,34 @@ export default function SinglePost({ post, delPost}) {
             }
         }; */
 
-       
+
 
     return (
 
-        <div className="singlePost">
-            <div className="singlePostWrapper">
-                <img src="https://walldeco.ua/img/gallery/21/thumbs/thumb_l_0407.jpg" alt="" className="singlePostImg" />
-                <div className="content">
-                    <h1 className="singlePostTitle">{post.title}
-                        <div className="singlePostEdit">
-                            <i className="singlePostIcon fa-regular fa-pen-to-square"></i>
-                            <i className="singlePostIcon fa-regular fa-trash-can"></i>
-                        </div>
-                    </h1>
-                    <div className="singlePostInfo">
-                        <span className="singlePostAuthor">Author: <b>{post.author}</b></span>
-                        <span className="singlePostDate">{new Date(post.createdAt).toLocaleDateString()}</span>
-                    </div>
-                    <p className="singlePostDesc">{post.text}</p>
-                  {/*   <Link to={{ pathname: '/editpost', search: `?id=${post._id}` }} data-id={post._id}>edit</Link> */}
-                    <button data-id={post._id} onClick={(e) => { delPost(e) }}>delete</button>
+        <div className="post">
+            <div className="post__wrapper">
+                <div className="post__img-container">
+                    <img src="https://walldeco.ua/img/gallery/21/thumbs/thumb_l_0407.jpg" alt="" className="post__img" />
                 </div>
-
+                <div className="post__info-container">
+                    <div className="post__content">
+                        <h1 className="post__title">{post.title}</h1>
+                        <p className="post__text">{post.text}</p>
+                    </div>
+                    <div className="post__info">
+                        <div className="post__date">
+                            <div>{new Date(post.createdAt).toLocaleDateString()}</div>
+                            <div className="post__author">Author: <b>{post.author}</b></div>
+                        </div>
+                        {user?.userEmail === post.email && (
+                            <div className="post__icons">
+                                <i className="post__icon fa-regular fa-pen-to-square" style={{ color: "purple" }}></i>
+                                <i className="post__icon fa-solid fa-trash-can" style={{ color: "red" }} data-id={post._id} onClick={(e) => { delPost(e) }}></i>
+                            </div>
+                        )}
+                    </div>
+                    {/*   <Link to={{ pathname: '/editpost', search: `?id=${post._id}` }} data-id={post._id}>edit</Link> */}
+                </div>
             </div>
         </div>
 
@@ -119,3 +124,4 @@ export default function SinglePost({ post, delPost}) {
 
     )
 }
+export default Post;

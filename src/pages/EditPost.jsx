@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Post = () => {
+const EditPost = () => {
     const [post, setPost] = useState(null);
     const navigate = useNavigate();
     const titleRef = useRef(null);
@@ -65,7 +65,7 @@ const Post = () => {
 
     return (
         <div>
-            <h1>Post:</h1>
+            <h1>EditPost:</h1>
             {post && (<form id="contact-form" method="post" action="/edit/post._id?_method=PUT">
                 <div className="form-info">
                     <label>Post Title
@@ -89,4 +89,4 @@ const Post = () => {
         </div>
     )
 }
-export default Post;
+export default EditPost;

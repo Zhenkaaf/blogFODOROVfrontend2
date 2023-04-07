@@ -1,29 +1,27 @@
 import './home.css';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import SinglePost from '../../components/post/Post';
+import Post from '../../components/post/Post';
+import { Context } from '../../context/Context';
 
 const Home = () => {
-
-    const [data, setData] = useState(null);
+const {user} = useContext(Context);
+    const [posts, setPosts] = useState(null);
     const navigate = useNavigate();
-    console.log('useStateData', data);
     useEffect(() => {
         console.log('posts useEffect');
         /* fetch('http://localhost:8001/posts') */
         fetch('https://zany-jade-chipmunk-cape.cyclic.app/posts')
             .then((response) => {
-                console.log(typeof response);
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
                 return response.json();
             })
-            .then((data) => {
-               
-                console.log(data);
-                 setData(data);
+            .then((posts) => {
+                console.log(posts);
+                 setPosts(posts);
             })
             .catch((er) => {
                 console.log('error', er);
@@ -35,8 +33,8 @@ const Home = () => {
     const delPost = (event) => {
         alert('inside');
         let id = event.target.getAttribute('data-id');
-        /* fetch(`http://localhost:8001/posts/${id}`, { */
-        fetch(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`, {
+        fetch(`http://localhost:8001/posts/${id}`, {
+       /*  fetch(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`, { */
             method: 'DELETE',
            /*  headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +43,9 @@ const Home = () => {
             }, */
            /*  mode: 'cors', */
         }).then(() => {
-            window.location.reload();
+            const updatedPosts = posts.filter(post => post._id !== id);
+            setPosts(updatedPosts);
+           /*  window.location.reload(); */
         });
     };
 
@@ -58,8 +58,8 @@ const Home = () => {
             <div>
             <h1 className='posts__header'>Posts:</h1>
             <ul>{
-                data?.map(post => (
-                    <SinglePost post={post} delPost={delPost}  key={post._id}/>
+                posts?.map(post => (
+                    <Post post={post} delPost={delPost}  key={post._id}/>
                    /*  <li key={post._id}>
                         <article >
                             <h2>

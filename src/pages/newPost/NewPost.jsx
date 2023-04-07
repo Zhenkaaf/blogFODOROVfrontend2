@@ -6,18 +6,12 @@ import './newpost.css';
 const NewPost = () => {
     const navigate = useNavigate();
     const titleRef = useRef(null);
-    const authorRef = useRef(null);
     const textRef = useRef(null);
-    const [data, setData] = useState(null);
     const {user} = useContext(Context);
+    console.log('user', user);
 
-    useEffect(() => {
-        console.log('work');
-
-    }, []);
     const sendData = (event) => {
         event.preventDefault();
-        console.log('createNewPost===', user.userEmail)
         /*  fetch('http://localhost:8001/newpost', { */
         fetch('https://zany-jade-chipmunk-cape.cyclic.app/newpost', {
             method: 'POST',
@@ -29,13 +23,12 @@ const NewPost = () => {
            /*  mode: 'cors', */
             body: JSON.stringify({
                 title: titleRef.current.value,
-                author: authorRef.current.value,
+                author: user.userName,
                 text: textRef.current.value,
                 email: user.userEmail,
             })
         })
             .then(response => {
-                console.log('tyt');
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
@@ -47,10 +40,9 @@ const NewPost = () => {
             }) */
             .then(data => {
                 console.log(data);
-                navigate('/posts');
+                navigate('/');
             })
             .catch(error => console.error(error));
-
     };
 
     return (
@@ -60,9 +52,6 @@ const NewPost = () => {
                 <div className="form-info">
                     <label>Post Title
                         <input type="text" name="title" ref={titleRef}></input>
-                    </label>
-                    <label>Author
-                        <input type="text" name="author" ref={authorRef}></input>
                     </label>
                 </div>
                 <div className="form-text">

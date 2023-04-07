@@ -14,6 +14,14 @@ const Register = () => {
     const [error, setError] = useState(false);
     const { dispatch, isFetching, user } = useContext(Context);
     const navigate = useNavigate();
+    
+
+
+
+
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

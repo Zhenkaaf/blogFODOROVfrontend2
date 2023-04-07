@@ -20,11 +20,11 @@ import NewPost from './pages/newPost/NewPost';
 import Posts from './pages/Posts';
 import Error from './pages/Error';
 import Menu from './components/menu/Menu';
-import Post from './pages/Post';
+import EditPost from './pages/EditPost';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
-import SinglePost from './components/post/Post';
+import Post from './components/post/Post';
 
 const Layout = () => {
   return (
@@ -46,11 +46,11 @@ function App() {
             <Route path="register" element={/* user ? <Home /> :  */<Register />} />
             <Route path="login" element={/* user ? <Home /> :  */<Login />} />
             <Route path="newpost" element={<NewPost />} />
-            <Route path="editpost" element={<Post />} />
+            <Route path="editpost" element={<EditPost />} />
             <Route path="profile" element={/* user ?  */<Profile />/*  : <Home /> */} />
            {/*  <Route path="posts" element={<Posts />} /> */}
             <Route path="error" element={<Error />} />
-            <Route path="singlepost" element={<SinglePost />} />
+           {/*  <Route path="singlepost" element={<SinglePost />} /> */}
             {/*   <Route path="post/:postId" element={<Single />} /> */}
           </Route>
         </Routes>

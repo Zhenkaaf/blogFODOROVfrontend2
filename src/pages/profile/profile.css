@@ -1,17 +1,15 @@
-.settings {
+.profile {
     display: flex;
     padding: 70px;
     
 }
-.settingsWrapper {
+.profile__wrapper {
     flex: 9;
 }
-.settingsTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.profile__settings {
+
 }
-.settingsUpdateTitle {
+.settings__title {
     font-size: 30px;
     margin-bottom: 20px;
     color: lightcoral;
@@ -31,8 +29,8 @@
     margin-top: 10px;
 }
 .settingsPP > img {
-    width: 70px;
-    height: 70px;
+    width: 150px;
+    height: 150px;
     border-radius: 5px;
     object-fit: cover;
 }
@@ -69,4 +67,10 @@
     padding: 10px;
     margin-top: 20px;
     cursor: pointer;
+}
+
+
+
+.profile__posts {
+
 }
