@@ -11,6 +11,7 @@ const Login = () => {
     const userEmailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
     
     
     const { user, dispatch, isFetching } = useContext(Context);
@@ -32,6 +33,7 @@ const Login = () => {
         } catch (err) {
             console.error(err);
             dispatch({ type: 'LOGIN_FAILURE' });
+            setError(true);
         }
     };
 
@@ -50,9 +52,7 @@ const Login = () => {
 
                 <button className="loginButton" type='submit' /* disabled={isFetching} */>Login</button>
             </form>
-            <button className="loginRegisterButton">
-                <Link className='link' to='/register'>REGISTER</Link>
-            </button>
+            <div>{error && <span>something wrong!</span>}</div>
            
         </div>
     )

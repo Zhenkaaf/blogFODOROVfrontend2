@@ -20,6 +20,7 @@ const Profile = () => {
     const [email, setEmail] = useState('');
     const [myPosts, setMyPosts] = useState(null);
     const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
     console.log(file);
 
 
@@ -39,7 +40,15 @@ const Profile = () => {
 
     }, [user]);
 
+
+    useEffect(() => {
+        if (file) {
+          upd();
+        }
+      }, [file]);
+
     const upd = async (e) => {
+        setLoading(true);
         if (file) {
             const filename = `${Date.now()}${file.name}`;
             const storageRef = ref(storage, `avatars/${filename}`);
@@ -58,6 +67,7 @@ const Profile = () => {
                             reject(error);
                         },
                         async () => {
+                           
                             console.log('3');
                             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                             console.log('File available at', downloadURL);
@@ -76,13 +86,16 @@ const Profile = () => {
                             }
 
                             resolve();
+                           
                         }
                     );
                 });
             } catch (err) {
                 console.error(err);
+                setLoading(false);
             }
         }
+        setLoading(false);
     };
 
 
@@ -95,13 +108,13 @@ const Profile = () => {
 
                     <h1 className="settings__title">Hello {user.userName} !</h1>
                     <div className="settingsPP">
-                        <img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'}/* {file ? URL.createObjectURL(file) : PF + user.profilePic} */ alt="" />
+                        {loading ? (<div className='loading'>Loading...</div>) : (<img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'} alt="" />) }
                         <label htmlFor="fileInput">
                             <i className="settingsPPIcon fa-regular fa-circle-user"></i>
                         </label>
                         <input type="file" id='fileInput' style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
                     </div>
-                    <button onClick={(e) => upd(e)}>upd</button>
+                    
 
 
                 </div>

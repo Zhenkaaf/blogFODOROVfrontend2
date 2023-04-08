@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Post from '../../components/post/Post';
 import { Context } from '../../context/Context';
+import axios from 'axios';
 
 const Home = () => {
 const {user} = useContext(Context);
@@ -30,7 +31,7 @@ const {user} = useContext(Context);
     }, [])
 
 
-    const delPost = (event) => {
+    const PREVIOUSdelPost = (event) => {
         alert('inside');
         let id = event.target.getAttribute('data-id');
         fetch(`http://localhost:8001/posts/${id}`, {
@@ -48,6 +49,18 @@ const {user} = useContext(Context);
            /*  window.location.reload(); */
         });
     };
+
+    const delPost = async (e) => {
+        let id = e.target.getAttribute('data-id');
+        try {
+            await axios.delete(`http://localhost:8001/posts/${id}`);
+            const updatedPosts = posts.filter(post => post._id !== id);
+            setPosts(updatedPosts);
+    
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
   
     return (
