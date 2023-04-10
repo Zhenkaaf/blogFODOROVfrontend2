@@ -25,6 +25,8 @@ import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import Post from './components/post/Post';
+import SinglePost from './pages/singlePost/SinglePost';
+
 
 const Layout = () => {
   return (
@@ -50,7 +52,7 @@ function App() {
             <Route path="profile" element={/* user ?  */<Profile />/*  : <Home /> */} />
            {/*  <Route path="posts" element={<Posts />} /> */}
             <Route path="error" element={<Error />} />
-           {/*  <Route path="singlepost" element={<SinglePost />} /> */}
+            <Route path="post/:postId" element={<SinglePost />} />
             {/*   <Route path="post/:postId" element={<Single />} /> */}
           </Route>
         </Routes>

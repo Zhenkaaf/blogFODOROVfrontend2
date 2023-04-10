@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/Context';
 import './post.css';
 
@@ -8,6 +8,7 @@ import './post.css';
 
 const Post = ({ post, delPost }) => {
     const { user } = useContext(Context);
+    const navigate = useNavigate();
     /*     const PF = 'http://localhost:5000/images/';
         const location = useLocation();
         const path = location.pathname.split('/')[2];
@@ -64,7 +65,7 @@ const Post = ({ post, delPost }) => {
                 </div>
                 <div className="post__info-container">
                     <div className="post__content">
-                        <h1 className="post__title">{post.title}</h1>
+                    <Link className='link' to={`/post/${post._id}`}/* to={`/post/${post._id}`} */><h1 className="post__title">{post.title}</h1></Link>
                         <p className="post__text">{post.text}</p>
                     </div>
                     <div className="post__info">
@@ -74,7 +75,7 @@ const Post = ({ post, delPost }) => {
                         </div>
                         {user?.userEmail === post.email && (
                             <div className="post__icons">
-                                <i className="post__icon fa-regular fa-pen-to-square" style={{ color: "purple" }}></i>
+                                <i className="post__icon fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={(e) => { navigate(`/post/${post._id}`, {post: 123}); }}></i>
                                 <i className="post__icon fa-solid fa-trash-can" style={{ color: "red" }} data-id={post._id} onClick={(e) => { delPost(e) }}></i>
                             </div>
                         )}
@@ -83,45 +84,6 @@ const Post = ({ post, delPost }) => {
                 </div>
             </div>
         </div>
-
-
-
-        /* <div className="singlePost">
-            <div className="singlePostWrapper">
-                {post.photo && (
-                    <img src={PF + post.photo} alt="" className="singlePostImg" />
-                )}
-
-                {updateMode
-                    ? (<input type='text' defaultValue={title} autoFocus className="singlePostTitleInput" onChange={(e) => setTitle(e.target.value)} />)
-                    :
-                    (<h1 className="singlePostTitle">{title}
-                        {post.username === user?.username && (
-                            <div className="singlePostEdit">
-                                <i className="singlePostIcon fa-regular fa-pen-to-square" onClick={() => setUpdateMode(true)} ></i>
-                                <i className="singlePostIcon fa-regular fa-trash-can" onClick={handleDelete}></i>
-                            </div>
-                        )}
-                    </h1>)
-                }
-
-                <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author:
-                        <Link className='link' to={`/?user=${post.username}`}><b>{post.username}</b></Link>
-                    </span>
-                    <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
-                </div>
-
-                {updateMode ? (<textarea className="singlePostDescInput" defaultValue={desc} onChange={(e) => setDesc(e.target.value)} />)
-                    : (<p className="singlePostDesc">{desc}</p>)
-                }
-
-                {updateMode && <button className="singlePostUpdate" onClick={handleUpdate}>Update</button>}
-
-            </div>
-        </div> */
-
-
     )
 }
 export default Post;

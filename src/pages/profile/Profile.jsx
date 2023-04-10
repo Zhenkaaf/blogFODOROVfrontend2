@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
-/* import Sidebar from '../../components/sidebar/Sidebar';
-import { Context } from '../../context/Context'; */
 import './profile.css';
 import EditPost from '../EditPost';
 import Post from '../../components/post/Post';
@@ -28,8 +26,8 @@ const Profile = () => {
     useEffect(() => {
         const fetchPersonalPosts = async () => {
             try {
-                /*  let myPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts?email=${user.userEmail}`); */
-                let personalPosts = await axios.get(`http://localhost:8001/posts/${user.userEmail}`);
+                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/?email=${user.userEmail}`);
+                /* let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
                 console.log('myPosts===', personalPosts);
                 setMyPosts(personalPosts.data)
             } catch (err) {
@@ -99,6 +97,18 @@ const Profile = () => {
     };
 
 
+    const delPost = async (e) => {
+        let id = e.target.getAttribute('data-id');
+        try {
+            await axios.delete(`http://localhost:8001/posts/${id}`);
+            const updatedPosts = myPosts.filter(post => post._id !== id);
+            setMyPosts(updatedPosts);
+    
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
 
     return (
@@ -121,7 +131,7 @@ const Profile = () => {
                 <div className="profile__posts">
                     <h1>My posts:</h1>
                     {myPosts?.map(post => (
-                        <Post post={post} key={post._id} />
+                        <Post post={post} key={post._id} delPost={delPost}/>
                     ))}
                 </div>
             </div>

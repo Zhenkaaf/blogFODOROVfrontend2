@@ -12,8 +12,8 @@ const NewPost = () => {
 
     const sendData = (event) => {
         event.preventDefault();
-        /*  fetch('http://localhost:8001/newpost', { */
-        fetch('https://zany-jade-chipmunk-cape.cyclic.app/newpost', {
+         fetch('http://localhost:8001/newpost', {
+       /*  fetch('https://zany-jade-chipmunk-cape.cyclic.app/newpost', { */
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

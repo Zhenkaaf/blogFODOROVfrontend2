@@ -7,11 +7,11 @@ import './menu.css';
 
 const Menu = () => {
     const { user, dispatch } = useContext(Context);
-const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleLogout = () => {
         dispatch(Logout());
         navigate('/');
-      
+
     };
 
     return (

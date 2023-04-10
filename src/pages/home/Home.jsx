@@ -10,7 +10,10 @@ const Home = () => {
 const {user} = useContext(Context);
     const [posts, setPosts] = useState(null);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
+        setLoading(true);
         console.log('posts useEffect');
         /* fetch('http://localhost:8001/posts') */
         fetch('https://zany-jade-chipmunk-cape.cyclic.app/posts')
@@ -23,6 +26,7 @@ const {user} = useContext(Context);
             .then((posts) => {
                 console.log(posts);
                  setPosts(posts);
+                 setLoading(false);
             })
             .catch((er) => {
                 console.log('error', er);
@@ -70,7 +74,7 @@ const {user} = useContext(Context);
             </div> */}
             <div>
             <h1 className='posts__header'>Posts:</h1>
-            <ul>{
+            {loading ? (<div>Loading...</div>) : (<ul>{
                 posts?.map(post => (
                     <Post post={post} delPost={delPost}  key={post._id}/>
                    /*  <li key={post._id}>
@@ -88,7 +92,8 @@ const {user} = useContext(Context);
                         </article>
                     </li> */
                 ))}
-            </ul>
+            </ul>)}
+            
         </div>
         </div>
     )
