@@ -29,7 +29,8 @@ const Profile = () => {
                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
                /*  let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
                 console.log('myPosts===', personalPosts);
-                setMyPosts(personalPosts.data)
+                const sortedPosts = personalPosts.data.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                setMyPosts(sortedPosts)
             } catch (err) {
                 console.error(err);
             }
@@ -99,7 +100,8 @@ const Profile = () => {
     const delPost = async (e) => {
         let id = e.target.getAttribute('data-id');
         try {
-            await axios.delete(`http://localhost:8001/posts/${id}`);
+            /* await axios.delete(`http://localhost:8001/posts/${id}`); */
+            await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`);
             const updatedPosts = myPosts.filter(post => post._id !== id);
             setMyPosts(updatedPosts);
 
