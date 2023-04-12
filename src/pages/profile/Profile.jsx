@@ -26,8 +26,8 @@ const Profile = () => {
     useEffect(() => {
         const fetchPersonalPosts = async () => {
             try {
-                /* let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`); */
-                let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`);
+                let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
+               /*  let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
                 console.log('myPosts===', personalPosts);
                 setMyPosts(personalPosts.data)
             } catch (err) {

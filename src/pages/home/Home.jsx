@@ -58,8 +58,10 @@ const Home = () => {
         let id = e.target.getAttribute('data-id');
         try {
             await axios.delete(`http://localhost:8001/posts/${id}`);
-            const updatedPosts = posts.filter(post => post._id !== id);
-            setPosts(updatedPosts);
+            /* const updatedPosts = posts.filter(post => post._id !== id);
+             setPosts(updatedPosts); */
+            const response = await axios.get('http://localhost:8001/posts');
+            setPosts(response.data);
 
         } catch (err) {
             console.error(err);
