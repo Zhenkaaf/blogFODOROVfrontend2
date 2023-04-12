@@ -10,16 +10,11 @@ const SinglePost = () => {
     const { user } = useContext(Context);
     const [post, setPost] = useState(null);
     const [title, setTitle] = useState('');
-
+    const [updateMode, setUpdateMode] = useState(false);
     const location = useLocation();
     const path = location.pathname.split('/')[2];
   
-    if (user && post) {
-        console.log(user);
-        console.log(post.email);
-      }
 
-    const updateMode = false;
 
     useEffect(() => {
         const getPost = async () => {
@@ -36,11 +31,13 @@ const SinglePost = () => {
     }, [path]);
 
 
-    const setUpdateMode = () => {
-
-    };
+   
     const handleDelete = () => {
+       
+    };
 
+    const handleUpdate = () => {
+        setUpdateMode(false);
     };
 
     return (
@@ -48,7 +45,7 @@ const SinglePost = () => {
             <div className="singlePost__wrapper">
 
                 <div className="singlePost__imgBlock">
-                    <img className="singlePost__img" src='https://images.pexels.com/photos/12629369/pexels-photo-12629369.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load' alt='' />
+                    <img className="singlePost__img" src={post?.picture ? post.picture : 'https://trello.com/1/cards/6436406450f37631fc39644d/attachments/6436407f7b591b3261f0e5e7/previews/6436407f7b591b3261f0e5f7/download/26345obil.jpg'} alt="" />
                 </div>
 
 
@@ -69,15 +66,15 @@ const SinglePost = () => {
                     <div className="singlePost__info">
                         <div className="singlePost__date">{new Date(post?.createdAt).toLocaleDateString()}</div>
                         <div className="singlePost__author">Author: {post?.author}</div>
-                        {/* post?.email === user?.useremail */true && (
+                        {post?.email === user?.userEmail && (
                             <div className="singlePost__icons">
-                                <i className="fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={() => setUpdateMode(true)} ></i>
+                               {!updateMode && <i className="singlePost__icon-edit fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={() => setUpdateMode(true)} ></i>}
                                 <i className="fa-regular fa-trash-can" style={{ color: "red", marginLeft: '20px' }} onClick={handleDelete}></i>
                             </div>
                         )}
                     </div>
 
-                    {updateMode && <button className="singlePost__updateBtn" /* onClick={handleUpdate} */>Save changes</button>}
+                    {updateMode && <button className="singlePost__updateBtn" onClick={handleUpdate}>Save changes</button>}
 
                 </div>
             </div>

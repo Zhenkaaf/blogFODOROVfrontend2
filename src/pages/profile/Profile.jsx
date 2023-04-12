@@ -26,8 +26,8 @@ const Profile = () => {
     useEffect(() => {
         const fetchPersonalPosts = async () => {
             try {
-                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
-                /* let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
+                /* let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`); */
+                let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`);
                 console.log('myPosts===', personalPosts);
                 setMyPosts(personalPosts.data)
             } catch (err) {
@@ -41,9 +41,9 @@ const Profile = () => {
 
     useEffect(() => {
         if (file) {
-          upd();
+            upd();
         }
-      }, [file]);
+    }, [file]);
 
     const upd = async (e) => {
         setLoading(true);
@@ -65,14 +65,13 @@ const Profile = () => {
                             reject(error);
                         },
                         async () => {
-                           
-                            console.log('3');
-                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                            console.log('File available at', downloadURL);
-
                             try {
+
+                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                                console.log('File available at', downloadURL);
+
                                 const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
-                                /* const res = await axios.put('http://localhost:8001/auth/profile', { */
+                                    /* const res = await axios.put('http://localhost:8001/auth/profile', { */
                                     ...user,
                                     userphotoURL: downloadURL,
                                 });
@@ -84,7 +83,7 @@ const Profile = () => {
                             }
 
                             resolve();
-                           
+
                         }
                     );
                 });
@@ -103,7 +102,7 @@ const Profile = () => {
             await axios.delete(`http://localhost:8001/posts/${id}`);
             const updatedPosts = myPosts.filter(post => post._id !== id);
             setMyPosts(updatedPosts);
-    
+
         } catch (err) {
             console.error(err);
         }
@@ -118,20 +117,20 @@ const Profile = () => {
 
                     <h1 className="settings__title">Hello {user.userName} !</h1>
                     <div className="settingsPP">
-                        {loading ? (<div className='loading'>Loading...</div>) : (<img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'} alt="" />) }
+                        {loading ? (<div className='loading'>Loading...</div>) : (<img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'} alt="" />)}
                         <label htmlFor="fileInput">
                             <i className="settingsPPIcon fa-regular fa-circle-user"></i>
                         </label>
                         <input type="file" id='fileInput' style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
                     </div>
-                    
+
 
 
                 </div>
                 <div className="profile__posts">
                     <h1>My posts:</h1>
                     {myPosts?.map(post => (
-                        <Post post={post} key={post._id} delPost={delPost}/>
+                        <Post post={post} key={post._id} delPost={delPost} />
                     ))}
                 </div>
             </div>
