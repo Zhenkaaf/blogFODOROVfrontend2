@@ -61,7 +61,7 @@ const Post = ({ post, delPost }) => {
         <div className="post">
             <div className="post__wrapper">
                 <div className="post__img-container">
-                    <img src={post.picture ? post.picture : 'https://trello.com/1/cards/6436406450f37631fc39644d/attachments/6436407f7b591b3261f0e5e7/previews/6436407f7b591b3261f0e5f7/download/26345obil.jpg'} alt="" className="post__img" />
+                    <img src={post.picture ? post.picture : 'https://i.postimg.cc/x1wg19Hk/26345obil.jpg'} alt="" className="post__img" />
                 </div>
                 <div className="post__info-container">
                     <div className="post__content">
