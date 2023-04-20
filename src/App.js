@@ -17,7 +17,6 @@ const Register = lazy(() => import('./pages/register/Register')); */
 
 import Home from './pages/home/Home.jsx';
 import NewPost from './pages/newPost/NewPost';
-import Posts from './pages/Posts';
 import Error from './pages/Error';
 import Menu from './components/menu/Menu';
 import EditPost from './pages/EditPost';

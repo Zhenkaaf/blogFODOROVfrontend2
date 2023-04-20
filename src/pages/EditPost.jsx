@@ -11,6 +11,7 @@ const EditPost = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
+    
 
 
     console.log('useStateData', post);

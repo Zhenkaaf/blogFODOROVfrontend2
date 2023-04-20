@@ -1,4 +1,3 @@
-import { getStorage } from "firebase/storage";
 import { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../../context/Context";

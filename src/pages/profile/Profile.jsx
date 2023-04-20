@@ -28,8 +28,9 @@ const Profile = () => {
             try {
                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
                /*  let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
-                console.log('myPosts===', personalPosts);
+                console.log('myPosts===', personalPosts.data);
                 const sortedPosts = personalPosts.data.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                console.log('sorted===', sortedPosts);
                 setMyPosts(sortedPosts)
             } catch (err) {
                 console.error(err);
@@ -246,3 +247,41 @@ console.error('front error===', err.response.data);
                         <button className="settingsSubmit" type='submit'>Update</button>
                            {success && <span style={{color: 'green', textAlign: 'center', marginTop: '10px'}}>User has been updated!</span>}
                     </form> */}
+
+
+
+
+
+
+
+
+
+                   /*  const upd = async (e) => {
+                        setLoading(true);
+                        if (file) {
+                            const filename = `${Date.now()}${file.name}`;
+                            const storageRef = ref(storage, `avatars/${filename}`);
+                            console.log('storageRef***', storageRef);
+                    
+                            const uploadTask = uploadBytesResumable(storageRef, file);
+                            console.log('uploadTask***', uploadTask);
+                    
+                            try {
+                                await uploadTask;
+                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                                console.log('File available at', downloadURL);
+                    
+                                const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
+                                   
+                                    ...user,
+                                    userphotoURL: downloadURL,
+                                });
+                                console.log('dispatch**********', res.data);
+                                dispatch(LoginSuccess(res.data));
+                            } catch (err) {
+                                console.error(err);
+                                setLoading(false);
+                            }
+                        }
+                        setLoading(false);
+                    }; */

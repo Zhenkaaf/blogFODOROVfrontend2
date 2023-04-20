@@ -75,7 +75,7 @@ const Post = ({ post, delPost }) => {
                         </div>
                         {user?.userEmail === post.email && (
                             <div className="post__icons">
-                                <i className="post__icon fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={(e) => { navigate(`/post/${post._id}`, {post: 123}); }}></i>
+                                <i className="post__icon fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={(e) => { navigate(`/post/${post._id}`, { state: { mode: true } }); }}></i>
                                 <i className="post__icon fa-solid fa-trash-can" style={{ color: "red" }} data-id={post._id} onClick={(e) => { delPost(e) }}></i>
                             </div>
                         )}
