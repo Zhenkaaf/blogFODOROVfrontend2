@@ -57,10 +57,12 @@ const Home = () => {
     const delPost = async (e) => {
         let id = e.target.getAttribute('data-id');
         try {
-            await axios.delete(`http://localhost:8001/posts/${id}`);
+           /*  await axios.delete(`http://localhost:8001/posts/${id}`); */
+           await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`);
             /* const updatedPosts = posts.filter(post => post._id !== id);
              setPosts(updatedPosts); */
-            const response = await axios.get('http://localhost:8001/posts');
+            /* const response = await axios.get('http://localhost:8001/posts'); */
+            const response = await axios.get('https://zany-jade-chipmunk-cape.cyclic.app/posts');
             setPosts(response.data);
 
         } catch (err) {

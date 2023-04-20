@@ -53,7 +53,8 @@ const SinglePost = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8001/posts/${post._id}`);
+           /*  await axios.delete(`http://localhost:8001/posts/${post._id}`); */
+            await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${post._id}`);
             navigate('/profile');
 
         } catch (err) {
@@ -63,7 +64,8 @@ const SinglePost = () => {
 
     const handleUpdate = async (newData) => {
         try {
-            let res = await axios.put(`http://localhost:8001/posts/${post._id}`, newData);
+           /*  let res = await axios.put(`http://localhost:8001/posts/${post._id}`, newData); */
+           let res = await axios.put(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${post._id}`, newData);
             setImageUrl(res.data.picture);
             setUpdateMode(false);
         } catch (err) {
