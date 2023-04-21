@@ -28,6 +28,7 @@
     max-width: 1024px;
     margin: 0 auto;
 }
-.posts__header {
-    padding-top: 60px;
+.home__header {
+   /*  padding-top: 60px; */
+    text-align: center;
 }

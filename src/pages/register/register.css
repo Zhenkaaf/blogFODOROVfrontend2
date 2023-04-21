@@ -1,15 +1,15 @@
 .register {
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     background: linear-gradient(rgba(255, 255, 255, 0.5),
     rgba(255, 255, 255, 0.5)), 
     url('https://images.wallpaperscraft.ru/image/single/bukvy_staryj_pechatnaia_mashinka_290439_1920x1080.jpg');
     background-size: cover;
 }
 .registerTitle {
+    padding-top: 20px;
     font-size: 50px;
 }
 .registerForm {
@@ -32,6 +32,7 @@
     border: none;
     color: white;
     padding: 10px;
+    margin-bottom: 20px;
 }
 .registerLoginButton {
     position: absolute;
@@ -43,3 +44,9 @@
     border: none;
     color: white;
 }
+
+@media screen and (max-height: 500px) {
+    .register {
+        height: 100%;
+    }
+  }

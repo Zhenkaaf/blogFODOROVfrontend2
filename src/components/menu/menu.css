@@ -4,6 +4,7 @@
     min-height: 50px;
     background-color: rebeccapurple;
     position: fixed;
+    top: 0px;
     z-index: 999;
 }
 .menu {
@@ -23,6 +24,8 @@
 .menu__list {
     margin: 0;
     display: flex;
+    color: white;
+    align-items: center;
 }
 .menu__item {
     display: block;
@@ -30,10 +33,8 @@
 }
 .menu__item_logout {
     display: flex;
-    align-items: center;
-    padding-right: 0px;
+    padding: 0px;
     cursor: pointer;
-    color: white;
 }
 .menu__profileImg {
     width: 40px;
@@ -43,4 +44,11 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+}
+
+@media (max-width: 480px) {
+    .menu__header {
+        font-size: 20px;
+        padding-right: 0px;
+    }
 }

@@ -53,7 +53,7 @@ const SinglePost = () => {
 
     const handleDelete = async () => {
         try {
-           /*  await axios.delete(`http://localhost:8001/posts/${post._id}`); */
+            /*  await axios.delete(`http://localhost:8001/posts/${post._id}`); */
             await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${post._id}`);
             navigate('/profile');
 
@@ -64,8 +64,8 @@ const SinglePost = () => {
 
     const handleUpdate = async (newData) => {
         try {
-           /*  let res = await axios.put(`http://localhost:8001/posts/${post._id}`, newData); */
-           let res = await axios.put(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${post._id}`, newData);
+            /*  let res = await axios.put(`http://localhost:8001/posts/${post._id}`, newData); */
+            let res = await axios.put(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${post._id}`, newData);
             setImageUrl(res.data.picture);
             setUpdateMode(false);
         } catch (err) {
@@ -142,12 +142,12 @@ const SinglePost = () => {
 
                     {updateMode ? (<div className='singlePost__file-container'>
                         <label htmlFor="singlePost__fileInput">
-                           {/*  <i className="newPost__icon fa-regular fa-image"></i> */}
-                           <div className='singlePost__chooseFile'>CHOOSE NEW PHOTO !</div>
+                            {/*  <i className="newPost__icon fa-regular fa-image"></i> */}
+                            <div className='singlePost__chooseFile'>CHOOSE NEW PHOTO !</div>
                         </label>
                         <input type="file" id='singlePost__fileInput' style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
-                    </div>) 
-                    : (null)}
+                    </div>)
+                        : (null)}
                 </div>
 
 
@@ -176,8 +176,11 @@ const SinglePost = () => {
                         )}
                     </div>
 
-                    {updateMode && <button className="singlePost__updateBtn" onClick={updatePost}>Save changes</button>}
-                    {updateMode && <button className="singlePost__cancelBtn" onClick={() => setUpdateMode(false)}>Cancel</button>}
+
+                    {updateMode && <div className="singlePost__buttons">
+                        <button className="singlePost__updateBtn" onClick={updatePost}>Save changes</button>
+                        <button className="singlePost__cancelBtn" onClick={() => setUpdateMode(false)}>Cancel</button>
+                    </div>}
 
                 </div>
             </div>

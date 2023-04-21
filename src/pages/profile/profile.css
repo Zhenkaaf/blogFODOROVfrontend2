@@ -1,15 +1,14 @@
 .profile {
     display: flex;
-    padding: 70px;
     max-width: 1024px;
     margin: 0 auto;
-    
 }
 .profile__wrapper {
     flex: 9;
+    
 }
 .profile__settings {
-
+    padding-left: 20px;
 }
 .settings__title {
     font-size: 30px;
@@ -81,4 +80,8 @@
 
 .profile__posts {
 
+}
+.profile__posts-title {
+    margin-top: 20px;
+    text-align: center;
 }

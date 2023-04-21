@@ -77,24 +77,10 @@ const Home = () => {
                 <img className="slider__img" src="https://trello.com/1/cards/641ff5e05b2f810f24bdc8bb/attachments/641ff5f7d9d0664367535f3c/previews/641ff5f8d9d0664367536607/download/novogodnie-oboi-2018-2-1.jpg" alt="" />
             </div> */}
             <div>
-                <h1 className='posts__header'>Posts:</h1>
+                <h1 className='home__header'>Posts:</h1>
                 {loading ? (<div>Loading...</div>) : (<ul>{
                     posts?.map(post => (
                         <Post post={post} delPost={delPost} key={post._id} />
-                        /*  <li key={post._id}>
-                             <article >
-                                 <h2>
-                                    <a href="/posts/1">{post.title}</a>
-                                 </h2>
-                                 <p>{post.text}</p>
-                                 <div className='info'>
-                                     <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-                                     <Link to={{ pathname: '/editpost', search: `?id=${post._id}` }} data-id={post._id}>edit</Link>
-                                     <button data-id={post._id} onClick={(e) => {delPost(e)}}>delete</button>
-                                     <span>Author: {post.author}</span>
-                                 </div>
-                             </article>
-                         </li> */
                     ))}
                 </ul>)}
 

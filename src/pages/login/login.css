@@ -1,6 +1,5 @@
 .login {
-    /* height: calc(100vh - 50px); */
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -11,6 +10,7 @@
     background-size: cover;
 }
 .loginTitle {
+    padding-top: 20px;
     font-size: 50px;
 }
 .loginForm {
@@ -33,6 +33,7 @@
     border: none;
     color: white;
     padding: 10px;
+    margin-bottom: 20px;
 }
 .loginButton:disabled {
     cursor: not-allowed;
@@ -47,3 +48,10 @@
     border: none;
     color: white;
 }
+
+
+@media screen and (max-height: 500px) {
+    .login {
+        height: 100%;
+    }
+  }

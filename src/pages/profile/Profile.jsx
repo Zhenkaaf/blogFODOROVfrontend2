@@ -131,7 +131,7 @@ const Profile = () => {
 
                 </div>
                 <div className="profile__posts">
-                    <h1>My posts:</h1>
+                    <h1 className="profile__posts-title">My posts:</h1>
                     {myPosts?.map(post => (
                         <Post post={post} key={post._id} delPost={delPost} />
                     ))}

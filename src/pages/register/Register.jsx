@@ -49,7 +49,7 @@ const Register = () => {
     return (
         <div className="register">
 
-            <span className="registerTitle">Register</span>
+            <div className="registerTitle">Register</div>
             <form action="" className="registerForm" onSubmit={handleSubmit}>
                 <label htmlFor="">Username</label>
                 <input className="registerInput" type="text" placeholder='username' onChange={e => setUserName(e.target.value)} />
