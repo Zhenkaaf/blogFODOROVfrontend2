@@ -1,0 +1,10 @@
+.loading__background {
+   
+   
+}
+.loading__spinner {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

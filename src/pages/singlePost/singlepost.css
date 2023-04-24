@@ -6,6 +6,7 @@
     margin: 0 auto;
     padding: 20px;
     background-color: bisque;
+    min-height: calc(100vh - 90px);
 }
 
 .singlePost__wrapper {

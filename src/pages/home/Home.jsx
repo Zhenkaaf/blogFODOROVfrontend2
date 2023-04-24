@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import Post from '../../components/post/Post';
 import { Context } from '../../context/Context';
 import axios from 'axios';
+import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
+
+
 
 const Home = () => {
     const { user } = useContext(Context);
@@ -78,7 +81,7 @@ const Home = () => {
             </div> */}
             <div>
                 <h1 className='home__header'>Posts:</h1>
-                {loading ? (<div>Loading...</div>) : (<ul>{
+                {loading ? (<LoadingSpinner />) : (<ul>{
                     posts?.map(post => (
                         <Post post={post} delPost={delPost} key={post._id} />
                     ))}

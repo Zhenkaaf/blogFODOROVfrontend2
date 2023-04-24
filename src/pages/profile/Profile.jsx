@@ -2,12 +2,10 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 import './profile.css';
-import EditPost from '../EditPost';
 import Post from '../../components/post/Post';
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { LoginStart, LoginSuccess } from '../../context/Actions';
-import { storage } from '../../firebase';
+import { LoginSuccess } from '../../context/Actions';
 import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
+import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
 
 
 
@@ -25,6 +23,7 @@ const Profile = () => {
 
 
     useEffect(() => {
+        setLoading(true);
         const fetchPersonalPosts = async () => {
             try {
                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
@@ -32,7 +31,8 @@ const Profile = () => {
                 console.log('myPosts===', personalPosts.data);
                 const sortedPosts = personalPosts.data.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 console.log('sorted===', sortedPosts);
-                setMyPosts(sortedPosts)
+                setMyPosts(sortedPosts);
+                setLoading(false);
             } catch (err) {
                 console.error(err);
             }
@@ -97,7 +97,7 @@ const Profile = () => {
 
                     <h1 className="settings__title">Hello {user.userName} !</h1>
                     <div className="settingsPP">
-                        {loading ? (<div className='loading'>Loading...</div>) : (<img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'} alt="" />)}
+                        {/* loading ? (<LoadingSpinner />) : ( */<img src={user.userPhoto ? user.userPhoto : 'https://photoshablon.com/_ph/44/193521795.jpg'} alt="" />/* ) */}
                         <label htmlFor="fileInput">
                             <i className="settingsPPIcon fa-regular fa-circle-user"></i>
                         </label>
@@ -109,9 +109,10 @@ const Profile = () => {
                 </div>
                 <div className="profile__posts">
                     <h1 className="profile__posts-title">My posts:</h1>
-                    {myPosts?.map(post => (
+                    {loading ? (<LoadingSpinner />) : (myPosts?.map(post => (
                         <Post post={post} key={post._id} delPost={delPost} />
-                    ))}
+                    )))}
+                    
                 </div>
             </div>
         </div>
