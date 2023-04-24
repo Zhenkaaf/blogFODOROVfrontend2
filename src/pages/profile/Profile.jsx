@@ -7,6 +7,7 @@ import Post from '../../components/post/Post';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { LoginStart, LoginSuccess } from '../../context/Actions';
 import { storage } from '../../firebase';
+import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
 
 
 
@@ -27,7 +28,7 @@ const Profile = () => {
         const fetchPersonalPosts = async () => {
             try {
                 let personalPosts = await axios.get(`https://zany-jade-chipmunk-cape.cyclic.app/posts/email/${user.userEmail}`);
-               /*  let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
+                /*  let personalPosts = await axios.get(`http://localhost:8001/posts/email/${user.userEmail}`); */
                 console.log('myPosts===', personalPosts.data);
                 const sortedPosts = personalPosts.data.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 console.log('sorted===', sortedPosts);
@@ -43,52 +44,28 @@ const Profile = () => {
 
     useEffect(() => {
         if (file) {
-            upd();
+            updProfilePhoto();
         }
     }, [file]);
 
-    const upd = async (e) => {
+    const updProfilePhoto = async (e) => {
         setLoading(true);
         if (file) {
-            const filename = `${Date.now()}${file.name}`;
-            const storageRef = ref(storage, `avatars/${filename}`);
-            console.log('storageRef***', storageRef);
-
-            const uploadTask = uploadBytesResumable(storageRef, file); //объект, который используется для управления процессом загрузки файла на Firebase Storage
-            console.log('uploadTask***', uploadTask);
 
             try {
-                await new Promise((resolve, reject) => {
-                    uploadTask.on(
-                        'state_changed',
-                        null,
-                        (error) => {
-                            console.error(error);
-                            reject(error);
-                        },
-                        async () => {
-                            try {
-
-                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                                console.log('File available at', downloadURL);
-
-                                const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
-                                    /* const res = await axios.put('http://localhost:8001/auth/profile', { */
-                                    ...user,
-                                    userphotoURL: downloadURL,
-                                });
-                                console.log('dispatch**********', res.data);
-                                dispatch(LoginSuccess(res.data));
-                            } catch (err) {
-                                console.error('front error===', err.response.data);
-                                throw err;
-                            }
-
-                            resolve();
-
-                        }
-                    );
-                });
+                let downloadURL = await uploadFileToFirebase(file, 'avatars');
+                try {
+                    const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
+                        /* const res = await axios.put('http://localhost:8001/auth/profile', { */
+                        ...user,
+                        userphotoURL: downloadURL,
+                    });
+                    console.log('dispatch**********', res.data);
+                    dispatch(LoginSuccess(res.data));
+                } catch (err) {
+                    console.error('front error===', err.response.data);
+                    throw err;
+                }
             } catch (err) {
                 console.error(err);
                 setLoading(false);
@@ -256,32 +233,32 @@ console.error('front error===', err.response.data);
 
 
 
-                   /*  const upd = async (e) => {
-                        setLoading(true);
-                        if (file) {
-                            const filename = `${Date.now()}${file.name}`;
-                            const storageRef = ref(storage, `avatars/${filename}`);
-                            console.log('storageRef***', storageRef);
-                    
-                            const uploadTask = uploadBytesResumable(storageRef, file);
-                            console.log('uploadTask***', uploadTask);
-                    
-                            try {
-                                await uploadTask;
-                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                                console.log('File available at', downloadURL);
-                    
-                                const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
-                                   
-                                    ...user,
-                                    userphotoURL: downloadURL,
-                                });
-                                console.log('dispatch**********', res.data);
-                                dispatch(LoginSuccess(res.data));
-                            } catch (err) {
-                                console.error(err);
-                                setLoading(false);
-                            }
-                        }
-                        setLoading(false);
-                    }; */
+/*  const upd = async (e) => {
+     setLoading(true);
+     if (file) {
+         const filename = `${Date.now()}${file.name}`;
+         const storageRef = ref(storage, `avatars/${filename}`);
+         console.log('storageRef***', storageRef);
+ 
+         const uploadTask = uploadBytesResumable(storageRef, file);
+         console.log('uploadTask***', uploadTask);
+ 
+         try {
+             await uploadTask;
+             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+             console.log('File available at', downloadURL);
+ 
+             const res = await axios.put('https://zany-jade-chipmunk-cape.cyclic.app/auth/profile', {
+                
+                 ...user,
+                 userphotoURL: downloadURL,
+             });
+             console.log('dispatch**********', res.data);
+             dispatch(LoginSuccess(res.data));
+         } catch (err) {
+             console.error(err);
+             setLoading(false);
+         }
+     }
+     setLoading(false);
+ }; */

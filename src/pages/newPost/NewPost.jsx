@@ -5,6 +5,7 @@ import './newpost.css';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 import { storage } from "../../firebase";
+import { uploadFileToFirebase } from "../../uploadToFirebase/uploadFileToFirebase";
 
 
 const NewPost = () => {
@@ -52,8 +53,8 @@ const NewPost = () => {
 
     const uploadPost = async (post) => {
         try {
-             const response = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/posts/newpost', post, {
-            /* const response = await axios.post('http://localhost:8001/posts/newpost', post, { */
+            /* const response = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/posts/newpost', post, { */
+            const response = await axios.post('http://localhost:8001/posts/newpost', post, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
@@ -118,48 +119,19 @@ const NewPost = () => {
     const sendData = async (event) => {
         event.preventDefault();
         if (file) {
-            const filename = `${Date.now()}${file.name}`;
-            const blogPhotoRef = ref(storage, `blogPhotos/${filename}`);
-            const uploadTask = uploadBytesResumable(blogPhotoRef, file);
-    
             try {
-                await new Promise((resolve, reject) => {
-                    uploadTask.on(
-                        "state_changed",
-                        (snapshot) => {
-                            // Handle upload progress if needed
-                        },
-                        (error) => {
-                            console.error(error);
-                            reject(error);
-                        },
-                        async () => {
-                            try {
-                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                                console.log('File available at', downloadURL);
-    
-                                const post = {
-                                    title: titleRef.current.value,
-                                    author: user.userName,
-                                    text: textRef.current.value,
-                                    email: user.userEmail,
-                                    picture: downloadURL,
-                                };
-    
-                                await uploadPost(post);
-    
-                                resolve();
-                            } catch (err) {
-                                console.error(err);
-                                reject(err);
-                            }
-                        }
-                    );
-                });
+                let downloadURL = await uploadFileToFirebase(file, 'blogPhotos');
+                const post = {
+                    title: titleRef.current.value,
+                    author: user.userName,
+                    text: textRef.current.value,
+                    email: user.userEmail,
+                    picture: downloadURL,
+                };
+                await uploadPost(post);
             } catch (err) {
                 console.error(err);
             }
-    
         } else {
             const post = {
                 title: titleRef.current.value,
@@ -167,8 +139,11 @@ const NewPost = () => {
                 text: textRef.current.value,
                 email: user.userEmail,
             };
-    
-            await uploadPost(post);
+            try {
+                await uploadPost(post);
+            } catch (err) {
+                console.error(err);
+            }
         }
     };
 

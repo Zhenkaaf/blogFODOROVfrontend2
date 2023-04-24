@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Context } from '../../context/Context';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
-
+import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
 
 const SinglePost = () => {
     const { user } = useContext(Context);
@@ -77,57 +77,30 @@ const SinglePost = () => {
 
 
     const updatePost = async (event) => {
-        /*  event.preventDefault(); */
         if (file) {
-            const filename = `${Date.now()}${file.name}`;
-            const blogPhotoRef = ref(storage, `blogPhotos/${filename}`);
-            const uploadTask = uploadBytesResumable(blogPhotoRef, file);
-
             try {
-                await new Promise((resolve, reject) => {
-                    uploadTask.on(
-                        "state_changed",
-                        (snapshot) => {
-                            // Handle upload progress if needed
-                        },
-                        (error) => {
-                            console.error(error);
-                            reject(error);
-                        },
-                        async () => {
-                            try {
-                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                                console.log('File available at', downloadURL);
-
-                                const post = {
-                                    email: user.userEmail,
-                                    title,
-                                    text: desc,
-                                    picture: downloadURL,
-                                };
-
-                                await handleUpdate(post);
-
-                                resolve();
-                            } catch (err) {
-                                console.error(err);
-                                reject(err);
-                            }
-                        }
-                    );
-                });
+                let downloadURL = await uploadFileToFirebase(file, 'blogPhotos');
+                const post = {
+                    email: user.userEmail,
+                    title,
+                    text: desc,
+                    picture: downloadURL,
+                };
+                await handleUpdate(post);
             } catch (err) {
                 console.error(err);
             }
-
         } else {
             const post = {
                 email: user.userEmail,
                 title,
                 text: desc,
             };
-
-            await handleUpdate(post);
+            try {
+                await handleUpdate(post);
+            } catch (err) {
+                console.error(err);
+            }
         }
     };
 
