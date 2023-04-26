@@ -34,15 +34,15 @@
     padding: 10px;
     margin-bottom: 20px;
 }
-.registerLoginButton {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: lightcoral;
-    cursor: pointer;
-    padding: 10px;
+.watch__spinner-register {
+    background-color: teal;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px;
     border: none;
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-height: 500px) {

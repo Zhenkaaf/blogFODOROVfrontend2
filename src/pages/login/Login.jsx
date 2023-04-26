@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Context } from '../../context/Context';
 import axios from 'axios';
-
-
+import { WatchSpinner } from '../../loadingSpinner/LoadingSpinner';
 
 const Login = () => {
 
@@ -13,12 +12,12 @@ const Login = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     
-    
     const { user, dispatch, isFetching } = useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: 'LOGIN_START' });
+      
         try {
            /*  const res = await axios.post('http://localhost:8001/auth/login', { */
            const res = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/auth/login', {
@@ -27,11 +26,10 @@ const Login = () => {
             });
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
             navigate('/profile');
-           
-            userEmailRef.current.value = '';
-            passwordRef.current.value = '';
         } catch (err) {
             console.error(err);
+            userEmailRef.current.value = '';
+            passwordRef.current.value = '';
             dispatch({ type: 'LOGIN_FAILURE' });
             setError(true);
         }
@@ -49,10 +47,12 @@ const Login = () => {
 
                 <label htmlFor="">Password</label>
                 <input className="loginInput" type="password" placeholder='password' ref={passwordRef} />
-
-                <button className="loginButton" type='submit' /* disabled={isFetching} */>Login</button>
+                {isFetching ? (<button className="watch__spinner-login" disabled="true" ><WatchSpinner /></button>) : (<button className="loginButton" type='submit' /* disabled={isFetching} */>Login</button>)}
+                
             </form>
             <div>{error && <span>something wrong!</span>}</div>
+          
+            
            
         </div>
     )

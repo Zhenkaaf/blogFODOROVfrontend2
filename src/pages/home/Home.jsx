@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Post from '../../components/post/Post';
 import { Context } from '../../context/Context';
 import axios from 'axios';
-import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
+import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
 
 
 

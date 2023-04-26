@@ -5,7 +5,7 @@ import './profile.css';
 import Post from '../../components/post/Post';
 import { LoginSuccess } from '../../context/Actions';
 import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
-import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
+import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
 
 
 

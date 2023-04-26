@@ -48,6 +48,16 @@
     border: none;
     color: white;
 }
+.watch__spinner-login {
+    background-color: lightcoral;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 @media screen and (max-height: 500px) {

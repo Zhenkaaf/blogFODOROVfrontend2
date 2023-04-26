@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Context } from '../../context/Context';
 import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
-import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
+import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
 
 const SinglePost = () => {
     const { user } = useContext(Context);
