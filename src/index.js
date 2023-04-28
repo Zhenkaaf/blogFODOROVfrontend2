@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-/* import { router } from './App'
-import { RouterProvider } from "react-router-dom"; */
 import { HashRouter, BrowserRouter } from "react-router-dom";
 import { ContextProvider } from './context/Context';
-import './firebase';
+
 /* const isLocal = window.location.hostname.includes('localhost');
 const Router = isLocal ? BrowserRouter : HashRouter; */
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

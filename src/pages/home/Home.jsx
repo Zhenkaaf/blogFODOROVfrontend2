@@ -1,11 +1,10 @@
 import './home.css';
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Post from '../../components/post/Post';
 import { Context } from '../../context/Context';
 import axios from 'axios';
-import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from '../../loadingSpinner/LoadingSpinner';
 
 
 
@@ -14,6 +13,7 @@ const Home = () => {
     const [posts, setPosts] = useState(null);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         setLoading(true);
@@ -39,7 +39,6 @@ const Home = () => {
 
 
     const PREVIOUSdelPost = (event) => {
-        alert('inside');
         let id = event.target.getAttribute('data-id');
         fetch(`http://localhost:8001/posts/${id}`, {
             /*  fetch(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`, { */
@@ -57,11 +56,13 @@ const Home = () => {
         });
     };
 
-    const delPost = async (e) => {
-        let id = e.target.getAttribute('data-id');
+    const delPost = async (postId) => {
+        setLoading(true);
+        /*  let id = e.target.getAttribute('data-id'); */
+        let id = postId;
         try {
-           /*  await axios.delete(`http://localhost:8001/posts/${id}`); */
-           await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`);
+            /*  await axios.delete(`http://localhost:8001/posts/${id}`); */
+            await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`);
             /* const updatedPosts = posts.filter(post => post._id !== id);
              setPosts(updatedPosts); */
             /* const response = await axios.get('http://localhost:8001/posts'); */
@@ -70,15 +71,18 @@ const Home = () => {
 
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
+
+
+
 
 
     return (
         <div className='home'>
-            {/* <div className="slider">
-                <img className="slider__img" src="https://trello.com/1/cards/641ff5e05b2f810f24bdc8bb/attachments/641ff5f7d9d0664367535f3c/previews/641ff5f8d9d0664367536607/download/novogodnie-oboi-2018-2-1.jpg" alt="" />
-            </div> */}
+
             <div>
                 <h1 className='home__header'>Posts:</h1>
                 {loading ? (<LoadingSpinner />) : (<ul>{

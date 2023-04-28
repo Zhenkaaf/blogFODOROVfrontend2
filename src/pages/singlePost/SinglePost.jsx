@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Context } from '../../context/Context';
 import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
 import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
+import { Popup } from '../../portal/Popup';
 
 const SinglePost = () => {
     const { user } = useContext(Context);
@@ -19,6 +20,7 @@ const SinglePost = () => {
     const [file, setFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     console.log(post);
     console.log(user);
 
@@ -106,6 +108,9 @@ const SinglePost = () => {
         }
     };
 
+    const handleClose = () => {
+        setIsOpen(false);
+    };
 
 
     return (
@@ -145,10 +150,15 @@ const SinglePost = () => {
                          <div className="singlePost__date">{new Date(post?.createdAt).toLocaleDateString()}</div>
                          <div className="singlePost__author">Author: {post?.author}</div>
                          {post?.email === user?.userEmail && (
-                             <div className="singlePost__icons">
+                            <div>
+                                <div>
+                                    {isOpen && <Popup isOpen={isOpen} onClose={handleClose} postId={post._id} onDelete={handleDelete} />}
+                                </div>
+                                <div className="singlePost__icons">
                                  {!updateMode && <i className="singlePost__icon-edit fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={() => setUpdateMode(true)} ></i>}
-                                 <i className="fa-regular fa-trash-can" style={{ color: "red", marginLeft: '20px' }} onClick={handleDelete}></i>
+                                 <i className="fa-regular fa-trash-can" style={{ color: "red", marginLeft: '20px' }} onClick={() => setIsOpen(true)}></i>
                              </div>
+                            </div>
                          )}
                      </div>
  

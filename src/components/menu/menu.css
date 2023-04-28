@@ -5,7 +5,7 @@
     background-color: rebeccapurple;
     position: fixed;
     top: 0px;
-    z-index: 999;
+    z-index: 998;
 }
 .menu {
     max-width: 800px;
@@ -21,6 +21,9 @@
 .menu__header {
     padding: 0px 20px;
 }
+.menu__header:hover {
+    color: bisque;
+}
 .menu__list {
     margin: 0;
     display: flex;
@@ -31,10 +34,16 @@
     display: block;
     padding: 0px 20px;
 }
+.menu__item:hover a {
+    color: bisque;
+}
 .menu__item_logout {
     display: flex;
     padding: 0px;
     cursor: pointer;
+}
+.menu__item_logout:hover {
+    color: bisque;
 }
 .menu__profileImg {
     width: 40px;

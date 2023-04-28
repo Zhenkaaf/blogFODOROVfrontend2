@@ -5,7 +5,7 @@ import './profile.css';
 import Post from '../../components/post/Post';
 import { LoginSuccess } from '../../context/Actions';
 import { uploadFileToFirebase } from '../../uploadToFirebase/uploadFileToFirebase';
-import {LoadingSpinner} from '../../loadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from '../../loadingSpinner/LoadingSpinner';
 
 
 
@@ -75,18 +75,22 @@ const Profile = () => {
     };
 
 
-    const delPost = async (e) => {
-        let id = e.target.getAttribute('data-id');
+    const delPost = async (postId) => {
+        setLoading(true);
+        let id = postId;
         try {
             /* await axios.delete(`http://localhost:8001/posts/${id}`); */
             await axios.delete(`https://zany-jade-chipmunk-cape.cyclic.app/posts/${id}`);
-            const updatedPosts = myPosts.filter(post => post._id !== id);
-            setMyPosts(updatedPosts);
+            /* const updatedPosts = myPosts.filter(post => post._id !== id); */
+            const response = await axios.get('https://zany-jade-chipmunk-cape.cyclic.app/posts');
+            setMyPosts(response.data);
 
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
 
 
@@ -112,7 +116,7 @@ const Profile = () => {
                     {loading ? (<LoadingSpinner />) : (myPosts?.map(post => (
                         <Post post={post} key={post._id} delPost={delPost} />
                     )))}
-                    
+
                 </div>
             </div>
         </div>

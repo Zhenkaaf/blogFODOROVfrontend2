@@ -5,22 +5,25 @@ import { Context } from '../../context/Context';
 import axios from 'axios';
 import { WatchSpinner } from '../../loadingSpinner/LoadingSpinner';
 
+
+
+
 const Login = () => {
 
     const userEmailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    
     const { user, dispatch, isFetching } = useContext(Context);
+  
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: 'LOGIN_START' });
-      
+
         try {
-           /*  const res = await axios.post('http://localhost:8001/auth/login', { */
-           const res = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/auth/login', {
+            /*  const res = await axios.post('http://localhost:8001/auth/login', { */
+            const res = await axios.post('https://zany-jade-chipmunk-cape.cyclic.app/auth/login', {
                 useremail: userEmailRef.current.value,
                 password: passwordRef.current.value,
             });
@@ -36,8 +39,13 @@ const Login = () => {
     };
 
 
-   
-   
+
+    
+
+
+
+
+
     return (
         <div className="login">
             <span className="loginTitle">Login</span>
@@ -47,13 +55,13 @@ const Login = () => {
 
                 <label htmlFor="">Password</label>
                 <input className="loginInput" type="password" placeholder='password' ref={passwordRef} />
-                {isFetching ? (<button className="watch__spinner-login" disabled="true" ><WatchSpinner /></button>) : (<button className="loginButton" type='submit' /* disabled={isFetching} */>Login</button>)}
-                
+                {isFetching ? (<button className="watch__spinner-login" disabled={true} ><WatchSpinner /></button>) : (<button className="loginButton" type='submit' /* disabled={isFetching} */>Login</button>)}
+
             </form>
-            <div>{error && <span>something wrong!</span>}</div>
-          
-            
-           
+            <div>{error && <span style={{ color: 'red', marginTop: '10px' }}>Something went wrong!</span>}</div>
+
+
+
         </div>
     )
 }

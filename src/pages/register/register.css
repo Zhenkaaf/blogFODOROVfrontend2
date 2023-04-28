@@ -34,6 +34,9 @@
     padding: 10px;
     margin-bottom: 20px;
 }
+.registerButton:hover {
+    background-color: rgb(4, 240, 240);
+}
 .watch__spinner-register {
     background-color: teal;
     margin-top: 20px;
@@ -43,6 +46,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.watch__spinner-register:disabled {
+    cursor: not-allowed;
 }
 
 @media screen and (max-height: 500px) {

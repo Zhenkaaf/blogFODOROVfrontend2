@@ -57,10 +57,10 @@ const Register = () => {
                 <input className="registerInput" type="email" placeholder='email' onChange={e => setEmail(e.target.value)} />
                 <label htmlFor="">Password</label>
                 <input className="registerInput" type="password" placeholder='password' onChange={e => setPassword(e.target.value)} />
-                {isFetching ? (<button className="watch__spinner-register" disabled="true" ><WatchSpinner /></button>) : (<button className="registerButton" type='submit'>Register</button>)}
+                {isFetching ? (<button className="watch__spinner-register" disabled={true} ><WatchSpinner /></button>) : (<button className="registerButton" type='submit'>Register</button>)}
             </form>
 
-            {error && <span style={{ color: 'red', marginTop: '10px' }}>{`User with such email: ${email} has already exist`}</span>}
+            {error && <span style={{ color: 'red', marginTop: '10px' }}>Something went wrong!</span>}
         </div>
     )
 }

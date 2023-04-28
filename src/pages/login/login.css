@@ -35,18 +35,11 @@
     padding: 10px;
     margin-bottom: 20px;
 }
-.loginButton:disabled {
-    cursor: not-allowed;
+.loginButton:hover {
+    background-color: rgb(252, 74, 74);
 }
-.loginRegisterButton {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: teal;
-    cursor: pointer;
-    padding: 10px;
-    border: none;
-    color: white;
+.watch__spinner-login:disabled {
+    cursor: not-allowed;
 }
 .watch__spinner-login {
     background-color: lightcoral;
