@@ -41,6 +41,10 @@
     cursor: pointer;
     text-align: center;
 }
+.singlePost__chooseFile:hover {
+    background-color: rgb(230, 10, 230);
+    color: bisque;
+}
 
 .singlePost__content {
    position: relative;

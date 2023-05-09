@@ -1,21 +1,19 @@
 .newPost {
-    padding: 70px;
+    width: 100%;
+    height: calc(100vh - 50px);
     background-color: bisque;
-    max-width: 1024px;
-  
-   /*  display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center; */
-    margin: 0 auto;
 }
 
 .newPost__wrapper {
-    width: 100%;
+    background-color: bisque;
+    padding: 20px 70px 0px 70px;
+    max-width: 1024px;
+    margin: 0 auto;
 }
 
 .newPost__header {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .newPost__form {
@@ -24,7 +22,7 @@
 
 .newPost__title,
 .newPost__text {
-    margin: 30px 0px 20px 0px;
+    margin: 0px 0px 30px 0px;
     width: 100%;
     border: none;
     outline: none;
@@ -47,12 +45,17 @@
 }
 
 .newPost__btn {
-    background-color: rgb(48, 233, 48);
+    background-color: green;
+    color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    margin-top: 20px;
+    margin: 20px 0px 20px 0px;
 }
 .newPost__btn:hover {
-    background-color: rgb(11, 253, 11);
+    background-color: rgb(5, 236, 5);
+}
+
+.newPost__warning {
+    color: red;
 }
