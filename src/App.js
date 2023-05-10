@@ -2,7 +2,7 @@ import './App.css';
 import './styles.css';
 import { lazy, Suspense, useContext } from 'react';
 import { Outlet, Routes, Route } from 'react-router-dom';
-import { Context } from './context/Context';
+
 
 /* const Home = lazy(() => import('./pages/home/Home'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
@@ -23,7 +23,6 @@ import EditPost from './pages/EditPost';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
-import Post from './components/post/Post';
 import SinglePost from './pages/singlePost/SinglePost';
 
 
