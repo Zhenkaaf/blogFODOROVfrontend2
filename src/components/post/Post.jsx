@@ -64,12 +64,11 @@ const Post = ({ post, delPost }) => {
 
 
     return (
-
         <div className="post">
 
             <div className="post__wrapper">
                 <div className="post__img-container">
-                    <img src={post.picture ? post.picture : 'https://i.postimg.cc/x1wg19Hk/26345obil.jpg'} alt="" className="post__img" />
+                <Link className='link' to={`/post/${post._id}`}><img src={post.picture ? post.picture : 'https://i.postimg.cc/x1wg19Hk/26345obil.jpg'} alt="" className="post__img" /></Link>
                 </div>
                 <div className="post__info-container">
                     <div className="post__content">

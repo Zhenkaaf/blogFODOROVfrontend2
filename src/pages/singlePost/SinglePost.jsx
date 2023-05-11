@@ -155,8 +155,8 @@ const SinglePost = () => {
                                     {isOpen && <Popup isOpen={isOpen} onClose={handleClose} postId={post._id} onDelete={handleDelete} />}
                                 </div>
                                 <div className="singlePost__icons">
-                                 {!updateMode && <i className="singlePost__icon-edit fa-regular fa-pen-to-square" style={{ color: "purple" }} onClick={() => setUpdateMode(true)} ></i>}
-                                 <i className="fa-regular fa-trash-can" style={{ color: "red", marginLeft: '20px' }} onClick={() => setIsOpen(true)}></i>
+                                 {!updateMode && <i className="singlePost__icon-edit fa-regular fa-pen-to-square" onClick={() => setUpdateMode(true)} ></i>}
+                                 <i className="singlePost__icon-del fa-regular fa-trash-can" onClick={() => setIsOpen(true)}></i>
                              </div>
                             </div>
                          )}
