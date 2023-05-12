@@ -119,7 +119,7 @@ const SinglePost = () => {
                  <div className="singlePost__wrapper">
 
                  <div className="singlePost__imgBlock">
-                     <img className="singlePost__img" src={imageUrl ? imageUrl : 'https://trello.com/1/cards/6436406450f37631fc39644d/attachments/6436407f7b591b3261f0e5e7/previews/6436407f7b591b3261f0e5f7/download/26345obil.jpg'} alt="" />
+                     <img className="singlePost__img" src={imageUrl ? imageUrl : 'https://i.postimg.cc/x1wg19Hk/26345obil.jpg'} alt="" />
  
                      {updateMode ? (<div className='singlePost__file-container'>
                          <label htmlFor="singlePost__fileInput">
